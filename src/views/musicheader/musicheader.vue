@@ -35,7 +35,7 @@ export default {
             this.$store.dispatch('searchmusic');
             //清除搜索框内容
             this.searchmes = '';
-            this.$router.push('/searchmusic')
+            this.$router.push({path:'/searchmusic'})
         }
     },
     created(){

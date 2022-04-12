@@ -21,8 +21,38 @@ const routes = [
       {
         path:'/searchmusic',
         name:'searchmusic',
-        component:()=>import('../views/searchmusic/searchmusic.vue')
-      }
+        component:()=>import('../views/centercontent/searchmusic/searchmusic.vue')
+      },
+      {
+        path:'/findmusic',
+        name:'findmusic',
+        component:()=>import('../views/centercontent/base1_findmusic/findmusic.vue')
+      },
+      {
+        path:'/boke',
+        name:'boke',
+        component:()=>import('../views/centercontent/base2_boke/boke.vue')
+      },
+      {
+        path:'/video',
+        name:'video',
+        component:()=>import('../views/centercontent/base3_video/video.vue')
+      },
+      {
+        path:'/focus',
+        name:'focus',
+        component:()=>import('../views/centercontent/base4_focus/focus.vue')
+      },
+      {
+        path:'/zhibo',
+        name:'zhibo',
+        component:()=>import('../views/centercontent/base5_zhibo/zhibo.vue')
+      },
+      {
+        path:'/personFM',
+        name:'personFM',
+        component:()=>import('../views/centercontent/base6_personFM/personFM.vue')
+      },
     ]
   },
   {

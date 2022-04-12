@@ -1,5 +1,9 @@
 <template>
-    <div class="footer">footer</div>
+    <div class="footer">
+        <div>歌名</div>
+        <audio src="" controls class="audio"></audio>
+        <div>歌单</div>
+    </div>
 </template>
 
 <script>
@@ -16,5 +20,12 @@ export default {
         height: 10%;
         background-color: rgb(255, 255, 255);
         border-top: 1px solid rgb(225, 225, 225);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .audio{
+        height: 40px;
+        width: 400px;
     }
 </style>

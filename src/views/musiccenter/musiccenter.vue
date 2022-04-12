@@ -1,7 +1,7 @@
 <template>
         <div class="center">
             <div class="content">
-                中间内容
+               
             </div>
         </div>
 </template>
@@ -16,7 +16,7 @@ export default {
     .center{
        position:absolute;
        height: 80%;
-       width: 85%;
+       min-width: 85%;
        left: 15%;
        top:10%;
     }
