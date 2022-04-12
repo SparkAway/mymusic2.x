@@ -1,19 +1,2 @@
-# mymusic2.x
-
-## Project setup
-```
-npm install
-```
-
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+# 第一版本
+实现了登录保存登录状态存储用户信息，主页基本骨架搭建了一半，还未实现大部分功能
