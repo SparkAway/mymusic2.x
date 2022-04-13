@@ -25,7 +25,11 @@ export default new Vuex.Store({
       icon:'',
       nickname:''
     },
-    search:''
+    search:'',
+    songs:{
+
+    },
+    songCount:''
   },
   getters: {
   },
@@ -121,6 +125,10 @@ export default new Vuex.Store({
       console.log(this.state.search)
       search(this.state.search).then((res)=>{
         console.log(res);
+        this.state.songs = res.data.result.songs;
+        this.state.songCount = res.data.result.songCount;
+        console.log(this.state.songs);
+        console.log(this.state.songCount)
       })
     }
   },

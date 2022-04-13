@@ -21,7 +21,54 @@ const routes = [
       {
         path:'/searchmusic',
         name:'searchmusic',
-        component:()=>import('../views/centercontent/searchmusic/searchmusic.vue')
+        component:()=>import('../views/centercontent/searchmusic/searchmusic.vue'),
+        children:[
+          {
+            path:'/danqu',
+            name:'danqu',
+            component:()=>import('../views/centercontent/searchmusic/children/danqu/danqu.vue')
+          },
+          {
+            path:'/geci',
+            name:'geci',
+            component:()=>import('../views/centercontent/searchmusic/children/geci/geci.vue')
+          },
+          {
+            path:'/gedan',
+            name:'gedan',
+            component:()=>import('../views/centercontent/searchmusic/children/gedan/gedan.vue')
+          },
+          {
+            path:'/geshou',
+            name:'geshou',
+            component:()=>import('../views/centercontent/searchmusic/children/geshou/geshou.vue')
+          },
+          {
+            path:'/searchboke',
+            name:'searchboke',
+            component:()=>import('../views/centercontent/searchmusic/children/searchboke/searchboke.vue')
+          },
+          {
+            path:'/shengyin',
+            name:'shengyin',
+            component:()=>import('../views/centercontent/searchmusic/children/shengyin/shengyin.vue')
+          },
+          {
+            path:'/shipin',
+            name:'shipin',
+            component:()=>import('../views/centercontent/searchmusic/children/shipin/shipin.vue')
+          },
+          {
+            path:'/yonghu',
+            name:'yonghu',
+            component:()=>import('../views/centercontent/searchmusic/children/yonghu/yonghu.vue')
+          },
+          {
+            path:'/zhuanji',
+            name:'zhuanji',
+            component:()=>import('../views/centercontent/searchmusic/children/zhuanji/zhuanji.vue')
+          }
+        ]  
       },
       {
         path:'/findmusic',
