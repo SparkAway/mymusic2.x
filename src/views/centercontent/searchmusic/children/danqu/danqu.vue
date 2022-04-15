@@ -6,7 +6,7 @@
         class="table"
         style="width: 100%">
             <el-table-column
-            prop="id"
+            prop="index"
             label=""
             width="37">
             </el-table-column>
@@ -23,17 +23,22 @@
                 <button class="btn1"><svg t="1649857223372" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4706" width="16" height="16"><path d="M952.8 668.48a40.16 40.16 0 0 0-39.2 39.2c0 86.24-57.6 156.96-130.88 156.96H241.28C168 864 110.4 793.92 110.4 707.68a40.16 40.16 0 0 0-39.2-39.2A40.16 40.16 0 0 0 32 707.68c0 130.72 94.24 235.36 209.28 235.36h541.44C897.76 943.04 992 838.4 992 707.68a40.16 40.16 0 0 0-39.2-39.2z" fill="rgb(192, 192, 192)" p-id="4707"></path><path d="M484.48 686.72a45.12 45.12 0 0 0 57.6 0l149.12-149.12a38.88 38.88 0 0 0-54.88-54.88l-81.12 81.12V119.04a39.36 39.36 0 0 0-78.56 0v444.8l-81.12-81.12a38.88 38.88 0 0 0-54.88 54.88z" fill="#bfbfbf" p-id="4708"></path></svg></button>
             </el-table-column>
             <el-table-column
-            prop="title"
+            prop="name"
             label="音乐标题"
-            width="420">
+            width="420"
+            @row-click="openmusic"
+            >
+                <template slot-scope="scope">
+                      <div class="musictitle" @click="openmusic(scope.row.id)">{{ scope.row.name }}</div>
+                </template>
             </el-table-column>
             <el-table-column
-            prop="singer"
+            prop="artists[0].name"
             label="歌手"
             width="180">
             </el-table-column>
             <el-table-column
-            prop="zhuanji"
+            prop="album.name"
             label="专辑"
             width="200">
             </el-table-column>
@@ -52,7 +57,9 @@
         background
         :page-size="100"
         layout="prev, pager, next"
-        :total="300">
+        :total="600"
+        @current-change="currentchange"
+        >
         </el-pagination>
     </div>
 </template>
@@ -61,38 +68,31 @@
 export default {
     data() {
       return {
-        tableData: [
-        {
-          id:'01',
-          title: '夜曲',
-          singer:'周杰伦',
-          zhuanji: '十一月的肖邦',
-          shichang: '4.34',
-          redu:'44'
-        }, {
-          id:'01',
-          title: '夜曲',
-          singer:'周杰伦',
-          zhuanji: '十一月的肖邦',
-          shichang: '4.34',
-          redu:'44'
-        }, {
-          id:'01',
-          title: '夜曲',
-          singer:'周杰伦',
-          zhuanji: '十一月的肖邦',
-          shichang: '4.34',
-          redu:'44'
-        }, {
-          id:'01',
-          title: '夜曲',
-          singer:'周杰伦',
-          zhuanji: '十一月的肖邦',
-          shichang: '4.34',
-          redu:'44'
-        }
-        ]
+        tableData:[],
       }
+    },
+    methods:{
+      getSongs(){
+          this.$store.dispatch('searchmusic');
+          setTimeout(() => {
+            this.tableData = this.$store.state.songs;
+          }, 1000);
+      },
+      openmusic(id){
+          this.$store.commit('setsongid',id);
+          this.$store.dispatch('getsongurl');
+      },
+      currentchange(current){
+          this.currentPage = current;
+          this.$store.state.songpage = this.currentPage;
+          this.$store.dispatch('searchmusic');
+          setTimeout(() => {
+            this.tableData = this.$store.state.songs;
+          }, 1000);
+      }
+    },
+    created(){
+        this.getSongs();
     }
 }
 </script>
@@ -112,5 +112,8 @@ export default {
             position: relative;
             top: 5px;
         }
+    }
+    .musictitle{
+        cursor: pointer;
     }
 </style>

@@ -9,6 +9,7 @@ import verifycaptcha from '@/api/verifycaptcha'
 import router from '../router/index'
 import usersubcount from '@/api/usersubcount'
 import search from '@/api/search'
+import getmusicurl from '@/api/getmusicurl'
 Vue.use(Vuex)
 
 export default new Vuex.Store({
@@ -26,12 +27,16 @@ export default new Vuex.Store({
       nickname:''
     },
     search:'',
-    songs:{
-
-    },
-    songCount:''
+    songs:[],
+    songCount:'',
+    songid:'',
+    songurl:'',
+    songpage:''
   },
   getters: {
+    getsongurl:state=>{
+      return state.songurl;
+    }
   },
   mutations: {
     setUser(state,newval){
@@ -48,7 +53,16 @@ export default new Vuex.Store({
       state.phoneform.captcha = newval;
     },
     setsearch(state,newval){
-      state.search = newval;
+      if(newval!==''){
+        let ses = window.sessionStorage;
+        ses.setItem("search",newval);
+      }
+    },
+    setsongid(state,newval){
+      state.songid = newval;
+    },
+    setsongurl(state,url){
+      state.songurl = url;
     }
   },
   actions: {
@@ -122,13 +136,20 @@ export default new Vuex.Store({
     },
     //搜索歌曲
     searchmusic(){
-      console.log(this.state.search)
-      search(this.state.search).then((res)=>{
-        console.log(res);
+      console.log(window.sessionStorage.search)
+      
+      search(window.sessionStorage.search,this.state.songpage).then((res)=>{
+        console.log(res)
         this.state.songs = res.data.result.songs;
-        this.state.songCount = res.data.result.songCount;
         console.log(this.state.songs);
-        console.log(this.state.songCount)
+        this.state.songCount = res.data.result.songCount;
+      })
+    },
+    //获取歌曲url
+    getsongurl(){
+      getmusicurl(this.state.songid).then((res)=>{
+       this.state.songurl = res.data.data[0].url;
+       console.log(this.state.songurl)
       })
     }
   },

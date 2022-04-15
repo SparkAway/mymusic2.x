@@ -31,11 +31,16 @@ export default {
         enter(){
             console.log(this.searchmes);
             //完成搜索功能
+            if(this.searchmes!==''){
             this.$store.commit('setsearch',this.searchmes);
-            this.$store.dispatch('searchmusic');
+            // this.$store.dispatch('searchmusic');
             //清除搜索框内容
             this.searchmes = '';
+            // this.$router.go(0); 
             this.$router.push({path:'/searchmusic'})
+            }else{
+                this.$router.push({path:'/findmusic'})
+            }
         }
     },
     created(){

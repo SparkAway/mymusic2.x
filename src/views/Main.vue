@@ -4,7 +4,7 @@
         <left></left>
         <div class="center">
             <div class="content">
-               <router-view></router-view>
+               <router-view ></router-view>
             </div>
         </div>
         <musicfooter></musicfooter>
@@ -23,6 +23,11 @@ export default {
         musicheader,
         musiccenter,
         left
+    },
+    computed: {
+        key() {
+            return this.$route.fullPath
+        }
     }
 }
 </script>
@@ -47,8 +52,14 @@ export default {
         overflow-y: scroll;
     }
     .content::-webkit-scrollbar{  
-        width: 5px;  
+        width: 6px;  
         height:10px;     
-        background-color:#b5b1b1;
+        background-color:rgb(255, 255, 255);
+    }
+    .content::-webkit-scrollbar-thumb{
+        border-radius:10px;
+        box-shadow:inset000pxrgba(240,240,240,.5);
+        background-color:rgb(181, 177, 177);
+        height: 140px;
     }
 </style>

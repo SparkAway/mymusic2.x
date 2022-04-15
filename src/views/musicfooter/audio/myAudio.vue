@@ -12,7 +12,6 @@
         </div>
         <button class="nextmusic"><svg t="1649764917862" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="6686" width="16" height="16"><path d="M655.706179 465.602819L332.053897 218.588294c-38.414608-29.327534-93.791393-1.929039-93.791392 46.396277v494.029051c0 48.325316 55.376785 75.725617 93.791392 46.398084l323.652282-247.014525c30.602722-23.357989 30.602722-69.436372 0-92.794362zM781.064814 780.798397V451.684117v-164.562559c0-19.628152 5.904521-60.475733-17.057907-75.841215-25.523642-17.068744-59.747828 1.210165-59.747828 31.919454v493.676839c0 19.628152-5.915358 60.473927 17.047069 75.841215 25.532673 17.068744 59.758666-1.211971 59.758666-31.919454z" fill="#231815" p-id="6687"></path></svg></button>
         <button class="words">词</button>
-
     </div>
     <!-- 操作盒子 -->
     <div class='operationBox'>
@@ -57,14 +56,12 @@
 </template>
 
 <script>
+import store from '@/store'
+import {mapGetters} from 'vuex'
 let timer
 export default {
   name: 'audio-vue',
   props: {
-    source: {
-      type: String,
-      default: 'http://music.163.com/song/media/outer/url?id=431795489.mp3'
-    },
     title: {
       type: Number,
       default: 1
@@ -82,6 +79,18 @@ export default {
       isTransition: true,
       ismouseDown: false,
       lastMoveVal: 0,
+      source:''
+    }
+  },
+  computed:{
+    ...mapGetters(["getsongurl"])
+  },
+  watch:{
+    getsongurl(data){
+      console.log('标记1',data)
+      this.source = data;
+      console.log('标记2',this.source);
+      document.getElementById('myAudio').load();
     }
   },
   methods: {
@@ -163,6 +172,8 @@ export default {
     }
   },
   mounted () {
+  },
+  created(){
   }
 }
 </script>

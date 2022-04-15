@@ -1,7 +1,7 @@
 <template>
     <div class="searchmusic">
         <div class="title">
-            <h1>搜索 {{this.$store.state.search}}</h1>
+            <h1>搜索 {{search}}</h1>
         </div>
         <div class="interested">
             <p>你可能感兴趣</p>
@@ -16,11 +16,12 @@
                 v-for="(item,index) in navlist" 
                 :key="index"
                 @click="routergo(index,item.url)"
-                :class="{active:index===current}"
+                :class="{ active: index == current }"
                 >
                     {{item.name}}
                 </li>
             </ul>
+            <div class="searchCount">找到{{this.$store.state.songCount}}首单曲</div>
         </div>
         <div class="button">
             <div class="button1">
@@ -44,6 +45,7 @@ export default {
     data(){
         return{
             current:0,
+            search:'',
             navlist:[
                 {
                     id:'01',
@@ -96,11 +98,22 @@ export default {
     methods:{
         routergo(index,url){
             this.current = index;
+            
             this.$router.push(url);
+        },
+        rendersearch(){
+            this.search = window.sessionStorage.search;
+        }
+    },
+    computed: {
+        key() {
+            return this.$route.path
         }
     },
     created(){
-        this.$router.push('/danqu')
+        console.log('创建了搜索页')
+        this.rendersearch();
+        this.$router.push('/danqu');
     }
 }
 </script>

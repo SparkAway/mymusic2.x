@@ -1,19 +1,12 @@
-# mymusic2.x
+## 第5次遇到的问题
+1.搜索歌曲时出现了数据加载和组件加载不同步的问题，就是数据是拿到了但是没加载在页面上，解决方案是给音乐列表页加载音乐数据到页面上一个时间延迟
+2.搜索了一首歌后以后跳转到了搜索页再次搜索后不会发生页面跳转，解决方案是在父组件router-view上加key属性绑定router的路径，这样就解决了vue复用加载好的组件的问题
+但是这样做产生了一个bug，就是搜索页不能切换到别的功能
 
-## Project setup
-```
-npm install
-```
+## 第5次尚未解决的问题
+偶尔会出现第一次进入页面搜索歌曲拿不到列表但是刷新后就又拿到了
+搜索搜索到东西后vue会把这个搜索页保存起来，此时再去上面搜索音乐，它会因为已经有搜索页面了而不重新加载搜索页面，如果给父组件的router-view加上key属性虽然解决了搜索问题，但是搜索页触发子路由时又会重新刷新搜索页面又会指定跳转到单曲页无法实现子路由的跳转。(我暂时给搜索后添加了一个路由go(0)会强制刷新所有页面再跳转到搜索页，这样做虽然解决了问题但是会重新请求加载用户信息可能会产生性能问题)
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
 
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+## 第5次好的点
+我把每次搜索的歌曲名都存到了sessionStorage里，然后当歌曲列表加载时才去拿歌单数据这样可以解决刷新后vuex储存数据消失问题（解决了刷新后搜索结果丢失)
